@@ -33,14 +33,7 @@ module Fx
       private
 
       def dumpable_functions_in_database
-        @_dumpable_functions_in_database ||=
-          if Fx.configuration.only_dump_these_functions.any?
-            Fx.database.functions.select do |function|
-              Fx.configuration.only_dump_these_functions.include?(function.name)
-            end
-          else
-            Fx.database.functions
-          end
+        @_dumpable_functions_in_database ||= Fx.database.functions
       end
     end
   end

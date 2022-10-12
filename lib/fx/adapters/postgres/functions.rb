@@ -39,7 +39,15 @@ module Fx
         #
         # @return [Array<Fx::Function>]
         def all
-          functions_from_postgres.map { |function| to_fx_function(function) }
+          functions = functions_from_postgres.map { |function| to_fx_function(function) }
+
+          if Fx.configuration.only_dump_these_functions.any?
+            functions.select do |function|
+              Fx.configuration.only_dump_these_functions.include?(function.name)
+            end
+          else
+            functions
+          end
         end
 
         private
