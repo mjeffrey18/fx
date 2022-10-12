@@ -23,8 +23,6 @@ module Fx
       end
 
       def functions(stream)
-        return if Fx.configuration.disable_functions_dump
-
         dumpable_functions_in_database.each do |function|
           stream.puts(function.to_schema)
         end
