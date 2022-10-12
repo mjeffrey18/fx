@@ -24,7 +24,14 @@ module Fx
       private
 
       def dumpable_triggers_in_database
-        @_dumpable_triggers_in_database ||= Fx.database.triggers
+        @_dumpable_triggers_in_database ||=
+          if Fx.configuration.only_dump_these_triggers.any?
+            Fx.database.triggers.select do |trigger|
+              Fx.configuration.only_dump_these_triggers.include?(trigger.name)
+            end
+          else
+            Fx.database.triggers
+          end
       end
     end
   end

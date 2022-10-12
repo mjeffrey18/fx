@@ -50,11 +50,23 @@ module Fx
     # @return Boolean
     attr_accessor :disable_triggers_dump
 
+    # disable certain triggers from being schema dumped
+    # Defaults to []
+    # @return [String]
+    attr_accessor :only_dump_these_triggers
+
+    # disable certain functions from being schema dumped
+    # Defaults to []
+    # @return [String]
+    attr_accessor :only_dump_these_functions
+
     def initialize
       @database = Fx::Adapters::Postgres.new
       @dump_functions_at_beginning_of_schema = false
       @disable_functions_dump = false
       @disable_triggers_dump = false
+      @only_dump_these_triggers = []
+      @only_dump_these_functions = []
     end
   end
 end
