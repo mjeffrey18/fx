@@ -10,6 +10,8 @@ module Fx
       end
 
       def triggers(stream)
+        return if Fx.configuration.disable_triggers_dump
+
         if dumpable_triggers_in_database.any?
           stream.puts
         end
