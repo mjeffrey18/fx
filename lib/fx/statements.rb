@@ -6,6 +6,6 @@ module Fx
   # @api private
   module Statements
     include Function
-    include Trigger
+    # include Trigger
   end
 end

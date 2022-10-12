@@ -6,7 +6,7 @@ module Fx
   # @api private
   module CommandRecorder
     include Function
-    include Trigger
+    # include Trigger
 
     private
 

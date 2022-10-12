@@ -37,7 +37,17 @@ module Fx
         #
         # @return [Array<Fx::Trigger>]
         def all
-          triggers_from_postgres.map { |trigger| to_fx_trigger(trigger) }
+          return [] if Fx.configuration.disable_triggers
+
+          triggers = triggers_from_postgres.map { |trigger| to_fx_trigger(trigger) }
+
+          if Fx.configuration.only_these_triggers.any?
+            triggers.select do |trigger|
+              Fx.configuration.only_these_triggers.include?(trigger.name)
+            end
+          else
+            triggers
+          end
         end
 
         private

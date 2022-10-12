@@ -5,6 +5,6 @@ module Fx
   # @api private
   module SchemaDumper
     include Function
-    include Trigger
+    # include Trigger
   end
 end
